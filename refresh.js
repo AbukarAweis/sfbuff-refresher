@@ -4,7 +4,6 @@ const FIGHTER_ID = "3795247575";
 
 const CHAR_IDS_API_URL = "https://script.google.com/macros/s/AKfycbxg5BCspawKmM5m9YH0YkVS9UkU6Br2t8hZMgEZaB-vynXJ4TV7mZgb3rzRhfLq1z6m/exec";
 
-// Rolling window in days (last 7 days)
 const WINDOW_DAYS = 90;
 
 function ymdUTC_(d) {
