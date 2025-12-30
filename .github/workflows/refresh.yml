@@ -3,15 +3,14 @@ name: Refresh SFBUFF
 on:
   schedule:
     - cron: "*/5 * * * *"
-    - cron: "2-59/5 * * * *"
   workflow_dispatch:
-  
+
 permissions:
   contents: read
 
 concurrency:
   group: refresh-sfbuff
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -26,9 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install deps
-        run: npm install
+        run: npm ci
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
