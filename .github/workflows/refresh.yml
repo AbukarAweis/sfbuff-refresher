@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: refresh-sfbuff
+  cancel-in-progress: true
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
